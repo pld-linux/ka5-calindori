@@ -1,39 +1,40 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	24.01.95
+%define		kdeappsver	23.08.4
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		calindori
 Summary:	Calendar application for Plasma Mobile
 Name:		ka5-%{kaname}
-Version:	24.01.95
-Release:	0.1
+Version:	23.08.4
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications
-Source0:	https://download.kde.org/unstable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	61d27aa27a2efc3428c8350e79c19c8f
+Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	311999f891df80a01d7edcaccb906a38
 URL:		http://www.kde.org/
-BuildRequires:	Qt6Core-devel
-BuildRequires:	Qt6DBus-devel >= 5.15.2
-BuildRequires:	Qt6Gui-devel >= 5.15.2
-BuildRequires:	Qt6Network-devel
-BuildRequires:	Qt6Qml-devel >= 5.15.9
-BuildRequires:	Qt6Quick-devel
-BuildRequires:	Qt6Svg-devel
-BuildRequires:	Qt6Widgets-devel >= 5.15.2
+BuildRequires:	Qt5Core-devel
+BuildRequires:	Qt5DBus-devel >= 5.15.2
+BuildRequires:	Qt5Gui-devel >= 5.15.2
+BuildRequires:	Qt5Network-devel
+BuildRequires:	Qt5Qml-devel >= 5.15.9
+BuildRequires:	Qt5Quick-controls2-devel
+BuildRequires:	Qt5Quick-devel
+BuildRequires:	Qt5Svg-devel
+BuildRequires:	Qt5Widgets-devel >= 5.15.2
 BuildRequires:	gettext-devel
-BuildRequires:	kf6-extra-cmake-modules >= 5.95.0
-BuildRequires:	kf6-kcalendarcore-devel >= 5.95.0
-BuildRequires:	kf6-kconfig-devel >= 5.95.0
-BuildRequires:	kf6-kcoreaddons-devel >= 5.95.0
-BuildRequires:	kf6-kdbusaddons-devel >= 5.95.0
-BuildRequires:	kf6-ki18n-devel >= 5.95.0
-BuildRequires:	kf6-kirigami-devel >= 5.95.0
-BuildRequires:	kf6-knotifications-devel >= 5.95.0
-BuildRequires:	kf6-kpeople-devel >= 5.95.0
+BuildRequires:	kf5-extra-cmake-modules >= 5.95.0
+BuildRequires:	kf5-kcalendarcore-devel >= 5.95.0
+BuildRequires:	kf5-kconfig-devel >= 5.95.0
+BuildRequires:	kf5-kcoreaddons-devel >= 5.95.0
+BuildRequires:	kf5-kdbusaddons-devel >= 5.95.0
+BuildRequires:	kf5-ki18n-devel >= 5.95.0
+BuildRequires:	kf5-kirigami2-devel >= 5.95.0
+BuildRequires:	kf5-knotifications-devel >= 5.95.0
+BuildRequires:	kf5-kpeople-devel >= 5.95.0
 BuildRequires:	ninja
-BuildRequires:	qt6-build >= %{qtver}
+BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
@@ -61,8 +62,7 @@ environments. It offers:
 	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	-DQT_MAJOR_VERSION=6
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
 %ninja_build -C build
 
 %if %{with tests}
@@ -87,5 +87,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/org.kde.calindori.desktop
 %{_datadir}/dbus-1/services/org.kde.calindac.service
 %{_iconsdir}/hicolor/scalable/apps/calindori.svg
-%{_datadir}/knotifications6/calindac.notifyrc
+%{_datadir}/knotifications5/calindac.notifyrc
 %{_datadir}/metainfo/org.kde.calindori.appdata.xml
